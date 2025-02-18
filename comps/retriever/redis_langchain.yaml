@@ -16,7 +16,22 @@ services:
       https_proxy: ${https_proxy}
       REDIS_URL: ${REDIS_URL}
       HUGGINGFACEHUB_API_TOKEN: ${HUGGINGFACEHUB_API_TOKEN}
+      MONGODB_URI: "mongodb://mongo:27017/"  # Add this line
+    depends_on:
+      - mongo  # Add this line
     restart: unless-stopped
+
+  mongo:  # Add this service
+    image: mongo:latest
+    container_name: mongodb-server
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db  # Persist MongoDB data
+    restart: unless-stopped
+
+volumes:  # Add this section
+  mongodb_data:
 
 networks:
   default:

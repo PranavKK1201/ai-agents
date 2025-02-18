@@ -13,3 +13,5 @@ sentence_transformers
 shortuuid
 transformers
 uvicorn
+pymongo
+
