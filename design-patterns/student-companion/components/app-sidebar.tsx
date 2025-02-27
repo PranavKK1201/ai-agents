@@ -1,7 +1,7 @@
-import Link from "next/link"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Dashboard,
   CalendarToday,
@@ -14,12 +14,12 @@ import {
   Help,
   Settings,
   Logout,
-} from "@mui/icons-material"
+} from "@mui/icons-material";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { useTheme } from "@/contexts/ThemeContext"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const menuItems = [
   { text: "Dashboard", icon: Dashboard, href: "/" },
@@ -33,17 +33,17 @@ const menuItems = [
   { text: "Support", icon: Help, href: "/support" },
   { text: "Settings", icon: Settings, href: "/settings" },
   { text: "Logout", icon: Logout, href: "/login" },
-]
+];
 
 export function AppSidebar() {
-  const pathname = usePathname()
-  const { mode, isSidebarCollapsed, toggleSidebar } = useTheme()
+  const pathname = usePathname();
+  const { mode, isSidebarCollapsed, toggleSidebar }: any = useTheme();
 
   return (
     <div
       className={cn(
         "relative flex h-screen flex-col border-r bg-background transition-all duration-300 ease-in-out",
-        isSidebarCollapsed ? "w-[60px]" : "w-[240px]",
+        isSidebarCollapsed ? "w-[60px]" : "w-[240px]"
       )}
     >
       <div className="flex h-16 items-center justify-between px-3">
@@ -51,8 +51,8 @@ export function AppSidebar() {
           <Image
             src={
               mode === "light"
-                ? "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1h7AsPVzmFcMAVxvF5RDXRnnXO5VhM.png"
-                : "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-wt0xz484LuNz7HU6CqgwqvlCX2pJ31.png"
+                ? "/student-companion.png"
+                : "/student-companion.png"
             }
             alt="Study Buddy Logo"
             width={120}
@@ -60,8 +60,17 @@ export function AppSidebar() {
             style={{ objectFit: "contain" }}
           />
         )}
-        <Button variant="ghost" size="icon" onClick={toggleSidebar} className="ml-auto">
-          {isSidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleSidebar}
+          className="ml-auto"
+        >
+          {isSidebarCollapsed ? (
+            <ChevronRight className="h-4 w-4" />
+          ) : (
+            <ChevronLeft className="h-4 w-4" />
+          )}
         </Button>
       </div>
       <ScrollArea className="flex-1">
@@ -73,10 +82,16 @@ export function AppSidebar() {
                 className={cn(
                   "w-full justify-start",
                   isSidebarCollapsed ? "px-2" : "px-4",
-                  pathname === item.href && "bg-secondary text-secondary-foreground",
+                  pathname === item.href &&
+                    "bg-secondary text-secondary-foreground"
                 )}
               >
-                <item.icon className={cn("h-5 w-5", isSidebarCollapsed ? "mr-0" : "mr-2")} />
+                <item.icon
+                  className={cn(
+                    "h-5 w-5",
+                    isSidebarCollapsed ? "mr-0" : "mr-2"
+                  )}
+                />
                 {!isSidebarCollapsed && <span>{item.text}</span>}
               </Button>
             </Link>
@@ -84,6 +99,5 @@ export function AppSidebar() {
         </div>
       </ScrollArea>
     </div>
-  )
+  );
 }
-
